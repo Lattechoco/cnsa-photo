@@ -36,13 +36,13 @@ app = Flask(__name__, static_folder='./static/', static_url_path='/static')
 @app.route('/')
 def start():
     # Delete Old Picture
-    # try:
-    #     for i in range(8):
-    #         os.remove('PHOTO/static/image/img_'+str(i+1)+'.webp')
+    try:
+        for i in range(8):
+            os.remove('PHOTO/static/image/img_'+str(i+1)+'.webp')
             
-    # except:
-    #     # print("no more pic")
-    #     pass        
+    except:
+        # print("no more pic")
+        pass        
     
     return render_template('start.html')
 

@@ -55,4 +55,4 @@ def paste(p1, p2, p3, p4, f_t, q):
     output = image2[64:1786, 86:703]
     
     # Save Img
-    cv2.imwrite("/Users/steal/Documents/vs_code/PHOTO/static/result"+str(datetime.today())+".png", output)
+    cv2.imwrite("cnsa-photo/PHOTO/static/result"+str(datetime.today())+".png", output)
