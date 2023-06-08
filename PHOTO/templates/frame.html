@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- Checkbox Style -->
+    <style>
+    input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      
+        border-radius: 50%;
+        width: 4em;
+        height: 4em;
+      
+        border: 0.1em solid #ffffff;
+        transition: 0.2s all linear;
+        margin-right: 5px;
+      
+        position: relative;
+        top: 4px;
+      }
+      
+      input:checked {
+        border: 0.6em solid rgb(0, 74, 249);
+      }</style>
+
+    <!-- Div Class -->
+      <style>
+        img{
+          width: auto;
+          height: 50vw;
+        }
+        .first {
+            width:100%;
+            box-sizing: border-box;
+        }
+
+        .second{
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .third{
+            width:50%;
+            box-sizing: border-box;
+        }
+
+        .image-border {
+        border: 2px solid black;
+        }
+        /* 선택된 이미지에 테두리 스타일 추가 */
+    .selected {
+      border: 2px solid rgb(255, 255, 255);
+    }
+      </style>
+      
+    <!-- BTN Style -->
+    <style>
+        
+    .custom-button {
+        
+        height: 10vw;
+        width: 20vw;
+        color: white;
+        font-size: 5vw;
+        border-radius: 20px; /* 사각형의 둥근 정도 */
+        background-color: rgb(71, 71, 92);
+        border-width: 0px;
+        font-family: 'Noto Sans KR', sans-serif;
+        position: fixed; right:5vw; top:75%;
+        
+    }
+    </style>
+    <title>frame</title>
+
+    <script>
+        function selectImage(imageNumber) {
+        // 모든 이미지에서 테두리 제거
+        var images = document.getElementsByTagName('img');
+
+        for (var i = 0; i < images.length; i++) {
+            images[i].classList.remove('selected');
+        }
+        
+        // 클릭된 이미지에 테두리 추가
+        var selectedImage = document.querySelector('img[alt="Image ' + imageNumber + '"]');
+        selectedImage.classList.add('selected');
+        
+        // 연동된 라디오 버튼 선택
+        var radio = document.getElementById('radio' + imageNumber);
+        radio.checked = true;
+        }
+    </script>
+</head>
+
+<body bgcolor='#242424'>
+    <!-- Quantity -->
+    <center>
+    <div>
+        <form action="/submit" method="post">
+            <div class="first" style="text-align: center;">
+                <label style="font-size: 4em; font-family: Noto Sans KR; color: white; font-family: 'Noto Sans KR', sans-serif;">수량&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <input type="radio" name="quantity" value="1" checked="checked" id="value1">
+                <label for="value1" style="font-size: 3em; color: white; font-family: 'Noto Sans KR', sans-serif;">1장&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            
+                <input type="radio" name="quantity" value="2" id="value2">
+                <label for="value2" style="font-size: 3em; color: white; font-family: 'Noto Sans KR', sans-serif;">2장&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            
+                <input type="radio" name="quantity" value="3" id="value3">
+                <label for="value3" style="font-size: 3em; color: white; font-family: 'Noto Sans KR', sans-serif;">3장&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            
+                <input type="radio" name="quantity" value="4" id="value4">
+                <label for="value4" style="font-size: 3em; color: white; font-family: 'Noto Sans KR', sans-serif;">4장</label>
+                </div>
+
+                <div class="second" style="text-align: center;">    
+                    <label style="font-size: 3em; color: white; font-family: 'Noto Sans KR', sans-serif;">프레임 스타일</label>
+                </div>
+                <div class="third" style="text-align: center;">
+                    <input type="radio" name="f_color" id="radio1" value="black" style="display: none;" checked="checked">
+                    <input type="radio" name="f_color" id="radio2" value="white" style="display: none;">
+        
+                    <label for="radio1">
+                        <img src="static/image/frame_black.png" alt="Image 1" onclick="selectImage(1)">
+                    </label>
+                
+                    <label for="radio2">
+                        <img src="static/image/frame_white.png" alt="Image 2" onclick="selectImage(2)">
+                    </label>
+
+                </div>
+                <input type="submit" value="다음"  class="custom-button" >
+
+        </form>
+    </div>
+    </center>
+
+</body>
+
+</html>
