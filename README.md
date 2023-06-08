@@ -54,5 +54,12 @@ http://127.0.0.1:5000
 5. 다 찍은 후, 원하는 **4장**의 사진을 원하는 순서로 골라요!
 6. 출력하기를 누른 후, **밖에서** 받아가요!
 ---------------
-
 ***궁금하신 점이 있다면, insta : @cha_b_salgae<br/>e-mail : realm-vinous-0b@icloud.com***
+---------------
+[업데이트 예정인 프레임 Made By 메타몽]
+![Frame_black_neon](https://github.com/Lattechoco/cnsa-photo/assets/72622319/d4d1ad32-63f3-4343-9c7f-902b85bb4c2e)
+![frame_blue](https://github.com/Lattechoco/cnsa-photo/assets/72622319/ffe22574-bc8e-4cf2-b763-b71020ef304e)
+![frame_sky](https://github.com/Lattechoco/cnsa-photo/assets/72622319/1534b232-1df1-42cf-b6e5-346e434698f3)
+
+
+
