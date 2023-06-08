@@ -1,6 +1,16 @@
+'''
+ ____                        __              
+/\  _`\                     /\ \__           
+\ \ \L\ \    __        ____   \ \ ,_\      __   
+ \ \ ,__/  /'__`\     /',__ \  \ \ \/    /'__`\ 
+  \ \ \/  /\ \L\.\_  /\__, `\   \ \ \_  /\  __/ 
+   \ \_\  \ \__/.\_\ \/\____/    \ \__\ \ \____|
+    \/_/   \/__/\/_/  \/___/      \/__/  \/____/
+'''
 import cv2
 from datetime import datetime
 
+# Img Resize Function
 def resize_image_keep_aspect_ratio(image, new_width, new_height):
     height, width = image.shape[:2]
     aspect_ratio = width / height
@@ -11,20 +21,19 @@ def resize_image_keep_aspect_ratio(image, new_width, new_height):
         new_width = int(new_height * aspect_ratio)
     return cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_LANCZOS4)
 
+# Img Add Function
 def paste(p1, p2, p3, p4, f_t, q):
-    pos_l = [107, 465, 820, 1178]  # Position List
-    pic_l = [p1, p2, p3, p4]
+    pos_l = [107, 465, 820, 1178] # Position List
+    pic_l = [p1, p2, p3, p4] # Img Num
 
-    img_name = 'PHOTO/static/image/img_'
+    img_name = 'PHOTO/static/image/img_' # Img Location
     img_ext = '.webp'
 
-    frame_name = 'PHOTO/static/image/frame_'
+    frame_name = 'PHOTO/static/image/frame_' # Frame Location
     frame_ext = '.png'
 
-    # 2번 사진 열기
     image2 = cv2.imread(frame_name + str(f_t) + frame_ext)
 
-    # 이전에 합성한 이미지를 저장하는 변수
     past_image = None
 
     for i in range(4):
@@ -32,15 +41,18 @@ def paste(p1, p2, p3, p4, f_t, q):
         print(img_full_name)
         image1 = cv2.imread(img_full_name)
 
-        # 이전 이미지의 비율 유지하며 가로(width) 크기를 528로 조정
+        # Resize Width To 528
         resized_image1 = resize_image_keep_aspect_ratio(image1, 528, 320)
         width, height = resized_image1.shape[:2]
 
-        # 이미지를 320 높이로 자르기
+        # Resize Height To 320
         crop_image1 = resized_image1[:320, :height]
 
-        # 자른 이미지를 2번 사진에 붙여넣기
+        # Paste image1 To image2
         image2[pos_l[i]:pos_l[i] + crop_image1.shape[0], 133:133 + crop_image1.shape[1]] = crop_image1
 
+    # Cut Img
     output = image2[64:1786, 86:703]
+    
+    # Save Img
     cv2.imwrite("/Users/steal/Documents/vs_code/PHOTO/static/result"+str(datetime.today())+".png", output)
