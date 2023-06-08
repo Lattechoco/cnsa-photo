@@ -81,6 +81,12 @@
             font-size: 50px;
         }
     </style>
+
+    <audio controls id="myAudio" style="display: none;">
+    <source src="./static/sound.mp3" type="audio/mp3">
+
+    Your browser does not support the audio element.
+    </audio>
 </head>
 
 <body>
@@ -126,7 +132,7 @@
             number_c = number_c - 1;
             countdown.textContent = number_c;
             if (number_c === 0) {
-                number_c = 10;
+                number_c = 11;
             }
         }
 
@@ -147,10 +153,11 @@
 
             // Start 10Sec CountDown
             startCountdown()
-            for (let i = 0; i < 9; i++) {
+            for (let i = 0; i < 10; i++) {
 
                 if(i != 0){
-                setTimeout(() => Trigger(i), i*10000) 
+                setTimeout(() => Trigger(i), i*11000)
+                setTimeout(() => document.getElementById('myAudio').play(), i*11000) 
                 }
             }
         }
@@ -197,6 +204,7 @@
 
             cameraOutput.src = cameraSensor.toDataURL("image/webp");
             cameraOutput.classList.add("taken");
+
             downloadImage(i)
             console.log(cameraSensor.height);
 
