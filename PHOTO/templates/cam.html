@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Camera Web App</title>
+
+    <!-- Title -->
+    <title>Taking Pic</title>
+
+    <!-- Style Setting -->
     <style>
         html, body{
             margin: 0;
@@ -77,45 +82,46 @@
         }
     </style>
 </head>
+
 <body>
-    <!-- main 태그는 문서의 주요 내용을 담는 태그이다. 한 문서에 한개 존재 해야 한다.
-        또한 article, aside, header, nav, footer등 요소의 하위에 사용해서는 안된다.
-    -->
     <main id="camera">
-        
         <canvas id="camera--sensor"></canvas>
 
-        <!-- 기기의 카메라에 접근하여 영상을 페이지에 재생한다. -->
+        <!-- Get Camera. -->
         <video id="camera--view" autoplay playsinline></video>
-        
-        <!-- changed -->
         <img src="//:0" alt="" id="camera--output" style="visibility: hidden;">
 
+        <!-- Hidden BTN For Taking Pic -->
         <button style="background-color: rgba(0,0,0,0);" id="camera--trigger"></button>
 
+        <!-- 10 Sec CountDown -->
         <div id="countdown"></div>
+
+        <!-- Remain Step -->
         <div id="count"></div>
-
-
     </main>
 
-
+    <!-- JS -->
     <script>
-
+        // Cam Setting
         let constraints = { video: { facingMode: "user"}, audio: false};
         const cameraView = document.querySelector("#camera--view");
         const cameraOutput = document.querySelector("#camera--output");
         const cameraSensor = document.querySelector("#camera--sensor");
         const cameraTrigger = document.querySelector("#camera--trigger");
+
+        // CountDown Setting
         const countdown = document.querySelector("#countdown");
         let countdownInterval;
         let number_c = 10;
 
+        // Start CountDown Function
         function startCountdown() {
             countdown.textContent = number_c;
             countdownInterval = setInterval(updateCountdown, 1000);
         }
 
+        // Update CountDown Function
         function updateCountdown() {
             number_c = number_c - 1;
             countdown.textContent = number_c;
@@ -124,76 +130,85 @@
             }
         }
 
+        // Camera Start Function
         function cameraStart(){
             navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream){
                     track = stream.getTracks()[0];
                     cameraView.srcObject = stream;
+                })
 
-                })
                 .catch(function(error){
-                    console.error("카메라에 문제가 있습니다.", error);
+                    console.error("Something Went Wrong :/", error);
                 })
+            
+            // Show Remain Step
             count.textContent = 1 + '/8';    
+
+            // Start 10Sec CountDown
             startCountdown()
             for (let i = 0; i < 9; i++) {
+
                 if(i != 0){
-                setTimeout(() => Trigger(i), i*10000)
+                setTimeout(() => Trigger(i), i*10000) 
                 }
             }
         }
 
-        // setTimeout(() => {
-        //     location.href = '/';
-        // }, 9.1* 10000); // Adjust the delay based on your requirements
-
-
+        // Image Download Function
         function downloadImage(num) {
+            // Image Setting
             var file_name = 'img';
             var full_name = file_name+'_'+num;
+
             var imgElement = document.getElementById("camera--output");
             var imageUrl = imgElement.src;
             
             var link = document.createElement("a");
             link.href = imageUrl;
-            link.download = full_name; // 다운로드될 이미지 파일명 설정
+            link.download = full_name; 
             link.click();
         }
 
-        //촬영 버튼 클릭 리스너
+        //Trigger For Taking Picture
         cameraTrigger.addEventListener("click", function(){
-            cameraSensor.width = cameraView.videoWidth; //640으로 정해져서 나오네?
+            // Picture => 640 x 480
+            cameraSensor.width = cameraView.videoWidth; 
             cameraSensor.height = cameraView.videoHeight;
             cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
             cameraOutput.src = cameraSensor.toDataURL("image/webp");
             cameraOutput.classList.add("taken");
             console.log(cameraSensor.height);
-            
         });
         
+        // Function For Taking Picture
         function Trigger(i) {
+            // Picture => 640 x 480
             count.textContent = (i+1) + '/8';
-            cameraSensor.width = cameraView.videoWidth; //640으로 정해져서 나오네?
+            cameraSensor.width = cameraView.videoWidth; 
             cameraSensor.height = cameraView.videoHeight;
             cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
+
+            // To Change Size
             // cameraSensor.width = 1920;
             // cameraSensor.height = 1080;
             // cameraSensor.getContext("2d").drawImage(cameraView, 0, 0, cameraSensor.width, cameraSensor.height);
-            cameraOutput.src = cameraSensor.toDataURL("image/webp", 1.0);
+            // cameraOutput.src = cameraSensor.toDataURL("image/webp", 1.0);
 
             cameraOutput.src = cameraSensor.toDataURL("image/webp");
             cameraOutput.classList.add("taken");
             downloadImage(i)
             console.log(cameraSensor.height);
 
+            // End Taking Picture => Move To http://127.0.0.1:5000/select
             if (i === 8) {
                 setTimeout(() => {
                 location.href = '/select';
-                }, 100); // 바로 이동하도록 1초 대기 후 이동
+                }, 100);
             }
 
         }
-        // 페이지가 로드되면 함수 실행
+        // Run Function When Page Is Loaded
         window.addEventListener("load", cameraStart, false);
     </script>
 </body>
