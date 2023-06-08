@@ -22,18 +22,20 @@ pip install requirements.txt
 </code>
 </pre>
 
-3. Run Flask Server
+3. Move PHOTO folder out of cnsa-photo
+
+4. Run Flask Server
 <pre>
 <code>
 Python app_flask.py
 </code>
 </pre>
 
-4. Setting Chrome Download Folder<br/>
+5. Setting Chrome Download Folder<br/>
 Settings -> Downloads -> Location
 Location = ***/PHOTO/static/image***
 
-5. Open Site In Chrome<br/>
+6. Open Site In Chrome<br/>
 http://127.0.0.1:5000
 ----------------------
 [특징]
