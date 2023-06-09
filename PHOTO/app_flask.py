@@ -3,7 +3,7 @@
   ___     ___               _____   /\_\      ___   
  /'___\ /' _ `\            /\ '__`\ \/\ \    /'___\ 
 /\ \__/ /\ \/\ \           \ \ \L\ \ \ \ \  /\ \__/ 
-\ \____\\ \_\ \_\           \ \ ,__/  \ \_\ \ \____|
+\ \____\ \ \_\ \_\           \ \ ,__/  \ \_\ \ \____|
  \/____/ \/_/\/_/  _______   \ \ \/    \/_/  \/____/
                   /\______\   \ \_\                
                   \/______/    \/_/                
@@ -36,13 +36,13 @@ app = Flask(__name__, static_folder='./static/', static_url_path='/static')
 @app.route('/')
 def start():
     # Delete Old Picture
-    try:
-        for i in range(8):
-            os.remove('PHOTO/static/image/img_'+str(i+1)+'.webp')
+    # try:
+    #     for i in range(8):
+    #         os.remove('PHOTO/static/image/img_'+str(i+1)+'.webp')
             
-    except:
-        # print("no more pic")
-        pass        
+    # except:
+    #     # print("no more pic")
+    #     pass        
     
     return render_template('start.html')
 
@@ -96,14 +96,20 @@ def selected():
         global s_l # Selected List
         s_l = list(selected_list)
         
-    return render_template('printing.html')
+    return redirect(url_for('printing'))
 
-# Pic Printing Page
-@app.route('/printing')
-def printing():
+# Pic make_pic Page
+@app.route('/makepic')
+def makepic():
     form.paste(s_l[0],s_l[1],s_l[2],s_l[3], style, quantity)
     #s_l[0] => first Pic Num, .... , style => Frame Style, quantity => Quantity To Print Picture
     
+    return redirect(url_for('printing'))
+
+# Printing Page
+@app.route('/printing')
+def printing():
+    #CODE#
     return render_template('printing.html')
 ##===== URL & PAGE SETTING =====##
 

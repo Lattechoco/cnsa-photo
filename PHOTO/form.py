@@ -9,6 +9,7 @@
 '''
 import cv2
 from datetime import datetime
+import qr
 
 # Img Resize Function
 def resize_image_keep_aspect_ratio(image, new_width, new_height):
@@ -55,4 +56,6 @@ def paste(p1, p2, p3, p4, f_t, q):
     output = image2[64:1786, 86:703]
     
     # Save Img
-    cv2.imwrite("PHOTO/static/image/result"+str(datetime.today())+".png", output)
+    file_path = "PHOTO/static/image/result"+str(datetime.today())+".png"
+    cv2.imwrite(file_path, output)
+    qr.file_set(file_path)
