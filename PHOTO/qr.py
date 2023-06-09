@@ -3,7 +3,7 @@ import os
 import qrcode
 
 # Set up Dropbox API
-access_token = 'sl.Bf_BcqBnOlHaOxIwi3yZsV22Za8zUzITpc5vgzgfOQr3PP2IoD8LMNvi1XREzum-Crg0C7ZrXrvPDUYZRyBFcXD02188Tgth4_MOyPshe2E8KHR9aMvujSngp7JZ3fvMEqEPFgDPwy6L'
+access_token = 'sl.Bf9BuD0_gmo-7ZUIjBT4CVLJGRu-b6_Og9YY5WlQKZotg6Dw5RvgYA-6DzkkzymHHr5zMgZglv_TGX62s-0zHk2uSGaHJGQaww40R_bnlWUNGXdGUHM7A58AvA5GLojYBCDdSQDCaafw'
 dbx = dropbox.Dropbox(access_token)
 
 def file_set(file_path):
