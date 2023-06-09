@@ -2,7 +2,11 @@ import dropbox
 import os
 import qrcode
 
+##===== URL_API =====##
+# https://www.dropbox.com/developers/apps/info/zf048g0xzr8b6kp
+##===== URL_APO =====##
 # Set up Dropbox API
+
 access_token = 'YOUR_DROPBOX_API_KEY'
 dbx = dropbox.Dropbox(access_token)
 
