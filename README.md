@@ -1,28 +1,22 @@
 # cnsa-photo
 놀라운 큰사-네컷 시스템 프로그램😮
 =========================
-
-
-
-
-![img](https://github.com/Lattechoco/cnsa-photo/assets/72622319/05bf2d49-e848-4ba2-9c87-39e7f6f4c223)
----------------
 [How To Set]
-1. Download project
+1. CLone Github Project
 <pre>
 <code>
 git clone https://github.com/Lattechoco/cnsa-photo.git
 </code>
 </pre>
 
-2. Install Required Package
+2. Install requirements.txt
 <pre>
 <code>
-pip install requirements.txt
+pip install -r requirements.txt
 </code>
 </pre>
 
-3. Move PHOTO folder out of cnsa-photo
+3. Move PHOTO folder **out of cnsa-photo**
 
 4. Run Flask Server
 <pre>
@@ -38,16 +32,6 @@ Location = ***/PHOTO/static/image***
 6. Open Site In Chrome<br/>
 http://127.0.0.1:5000
 ----------------------
-[특징]
-1. 실제 인생네컷과 같이 프레임을 고를 수 있어요!
-2. 실제 인생네컷 용지처럼 프린트할 수 있어요!
-3. 총 8장의 사진을 10초 타이머로 찍은 뒤, 4장을 **순서를 골라** 출력할 수 있어요!
-4. 무려 **디지털 카메라**를 사용하여 **타 부스**보다 화질이 좋아요!
-5. 놀라운 큰 모니터를 사용하여 눈을 찌푸리지 않고도 내 모습을 볼 수 있어요!(**타 부스와 다르게**)
-6. 정말 대단한 팀원들과 **함께** 만들었어요!
-7. 부스 내부에 **눈을 뜨지 못할정도로** 조명이 많아요!
-8. 개발자가 **직접** 코드를 **2일만에** 작성했답니다 -~~(w/ 염전노예)~~- !
--------------------
 [사용 방법]
 1. 화면을 터치해요!
 2. 출력할 매수를 고르고, 프레임을 골라요!
@@ -58,10 +42,4 @@ http://127.0.0.1:5000
 ---------------
 ***궁금하신 점이 있다면, insta : @cha_b_salgae<br/>e-mail : realm-vinous-0b@icloud.com***
 ---------------
-[업데이트 예정인 프레임 Made By 메타몽]
-![Frame_black_neon](https://github.com/Lattechoco/cnsa-photo/assets/72622319/d4d1ad32-63f3-4343-9c7f-902b85bb4c2e)
-![frame_blue](https://github.com/Lattechoco/cnsa-photo/assets/72622319/ffe22574-bc8e-4cf2-b763-b71020ef304e)
-![frame_sky](https://github.com/Lattechoco/cnsa-photo/assets/72622319/1534b232-1df1-42cf-b6e5-346e434698f3)
-
-
 
