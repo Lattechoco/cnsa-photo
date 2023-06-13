@@ -16,20 +16,22 @@ pip install -r requirements.txt
 </code>
 </pre>
 
-3. Move PHOTO folder **out of cnsa-photo**
+3. In qr.py, you need to enter **your dropbox api key**
 
-4. Run Flask Server
+4. Move PHOTO folder **out of cnsa-photo**
+
+5. Run Flask Server
 <pre>
 <code>
 Python app_flask.py
 </code>
 </pre>
 
-5. Setting Chrome Download Folder<br/>
+6. Setting Chrome Download Folder<br/>
 Settings -> Downloads -> Location
 Location = ***/PHOTO/static/image***
 
-6. Open Site In Chrome<br/>
+7. Open Site In Chrome<br/>
 http://127.0.0.1:5000
 ----------------------
 [사용 방법]
