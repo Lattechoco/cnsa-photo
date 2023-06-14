@@ -8,6 +8,7 @@
     \/_/   \/__/\/_/  \/___/      \/__/  \/____/
 '''
 import cv2
+import numpy as np
 from datetime import datetime
 import qr
 
@@ -55,7 +56,14 @@ def paste(p1, p2, p3, p4, f_t, q):
     # Cut Img
     output = image2[64:1786, 86:703]
     
+    # Duplicate Img
+    new_image = np.hstack((output, output)) # Made By ByQuincy
+
     # Save Img
-    file_path = "PHOTO/static/image/result"+str(datetime.today())+".png"
-    cv2.imwrite(file_path, output)
-    qr.file_set(file_path)
+    file_path_ori = "PHOTO/static/image/result_ori"+str(datetime.today())+".png"
+    file_path_print = "PHOTO/static/image/result_print"+str(datetime.today())+".png"
+
+    cv2.imwrite(file_path_print, new_image)
+    cv2.imwrite(file_path_ori, output)
+
+    qr.file_set(file_path_ori)
