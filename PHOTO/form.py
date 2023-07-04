@@ -11,7 +11,6 @@ import cv2
 import numpy as np
 from datetime import datetime
 import qr
-import printer
 
 PATH_P = None
 PATH_F = None
@@ -95,5 +94,6 @@ def get_path():
         # print('qu', qu, type(qu))
         qu = int(qu)
         # print('t2i', t2, type(t2))
+        import printer
         printer.printing(parh_pri, qu)
     return path_ori
