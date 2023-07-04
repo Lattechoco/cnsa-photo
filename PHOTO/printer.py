@@ -1,20 +1,28 @@
-import cups
+import subprocess
+import re
 
 def printing(PATH_TO_IMG, q):
     # Create a connection to the CUPS server
-    print(PATH_TO_IMG, type(PATH_TO_IMG))
+    string = PATH_TO_IMG
+    pattern = r"result_print(\d{4}-\d{2}-\d{2})"
+
+    match = re.search(pattern, string)
     
+    print(match)
+
+    # subprocess.run("cd /Users/dogg/vs_code/PHOTO/static/image", shell=True)
+    
+    replaced_string = PATH_TO_IMG[19:].replace(" ", "\ ")
+
+    command = 'cd /Users/dogg/vs_code/PHOTO/static/image; lp -d Canon_SELPHY_CP1500 -o media=Custom.100x148mm -o borderless=True '+replaced_string
+
+    print(command)
     for i in range(q):
-        conn = cups.Connection()
+        subprocess.run(command, shell=True)
+        pass
+    
+    subprocess.run("cd ..", shell=True)
+    subprocess.run("cd ..", shell=True)
 
-        # Get the list of available printers
-        printers = conn.getPrinters()
 
-        # Select a printer
-        printer_name = 'Canon_SELPHY_CP1500_2'
-        printer_info = printers[printer_name]
-
-        # Print a PNG filea
-        file_path = PATH_TO_IMG
-        job_id = conn.printFile(printer_name, file_path, "Print Job", {})
-        print("Print job submitted with ID:", job_id)
+    
