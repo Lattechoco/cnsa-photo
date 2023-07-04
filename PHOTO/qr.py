@@ -4,10 +4,10 @@ import qrcode
 
 ##===== URL_API =====##
 # https://www.dropbox.com/developers/apps/info/zf048g0xzr8b6kp
-##===== URL_APO =====##
+##===== URL_API =====##
 # Set up Dropbox API
 
-access_token = 'YOUR_DROPBOX_API_KEY'
+access_token = 'YOUR_API_KEY'
 dbx = dropbox.Dropbox(access_token)
 
 def file_set(file_path):
@@ -39,11 +39,11 @@ def make_qr(download_url):
     # URL
     url = download_url
 
-    # QR 코드 이미지 생성
+    # Generate Qr
     qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_H, box_size=10, border=4)
     qr.add_data(url)
     qr.make(fit=True)
 
-    # QR 코드 이미지를 파일로 저장
+    # Save Qr Image
     image = qr.make_image(fill_color="black", back_color="white")
     image.save("PHOTO/static/image/qr.png")
