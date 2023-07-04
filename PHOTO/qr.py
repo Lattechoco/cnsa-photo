@@ -7,7 +7,7 @@ import qrcode
 ##===== URL_API =====##
 # Set up Dropbox API
 
-access_token = 'YOUR_API_KEY'
+access_token = 'sl.BhghyEFlcsSvNHzFV0wmJR6A2amqNgc2aAfNJLllen81cq5qSEAA1cDpENIeGtDw8kWiwXt1i4P75zAf0p936jHKfF6LChgds_-_hudDjjbO86NE_N9BvNELVrN8SpVHRzmJckLhssMA'
 dbx = dropbox.Dropbox(access_token)
 
 def file_set(file_path):
@@ -39,11 +39,11 @@ def make_qr(download_url):
     # URL
     url = download_url
 
-    # Generate Qr
+    # Generate QR
     qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_H, box_size=10, border=4)
     qr.add_data(url)
     qr.make(fit=True)
 
-    # Save Qr Image
+    # Save QR
     image = qr.make_image(fill_color="black", back_color="white")
     image.save("PHOTO/static/image/qr.png")
