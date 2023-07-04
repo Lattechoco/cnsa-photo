@@ -36,13 +36,13 @@ app = Flask(__name__, static_folder='./static/', static_url_path='/static')
 @app.route('/')
 def start():
     # Delete Old Picture
-    try:
-        for i in range(8):
-            os.remove('PHOTO/static/image/img_'+str(i+1)+'.webp')
+    # try:
+    #     for i in range(8):
+    #         os.remove('PHOTO/static/image/img_'+str(i+1)+'.webp')
             
-    except:
-        # print("no more pic")
-        pass        
+    # except:
+    #     # print("no more pic")
+    #     pass        
     
     return render_template('start.html')
 
@@ -69,6 +69,9 @@ def save():
 # Payment Page
 @app.route('/pay')
 def pay():
+    global quantity
+    price = int(quantity)*3000
+    print(price)
     #Code#
     # Not Developed, After Arduino Job Is Done
     # return render_template('payment.html') # Release Ver.
@@ -110,7 +113,10 @@ def makepic():
 @app.route('/printing')
 def printing():
     #CODE#
-    return render_template('printing.html')
+    t = str(form.get_path())
+    path = t[len("/PHOTO"):]
+    print(path)
+    return render_template('printing.html', path = path)
 ##===== URL & PAGE SETTING =====##
 
 
