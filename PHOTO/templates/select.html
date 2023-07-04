@@ -4,16 +4,18 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <!-- Font Setting -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+            rel="stylesheet"
+        />
 
         <!-- Style Setting -->
         <style>
             /* Img Grid */
             .image-grid {
                 display: grid;
-                margin-top: 25vh;
                 grid-template-columns: repeat(4, 1fr);
                 grid-gap: 10px;
                 position: relative;
@@ -23,20 +25,49 @@
             .image-grid img {
                 width: 100%;
                 height: auto;
+                border: 2px solid rgba(126, 126, 126, 0);
+                opacity: 1;
             }
 
             /* Selected Img */
             .selected {
-                border: 5px solid #FFFFFF;
+                border: 5px solid #ffffff;
+                animation-name: selected;
+                animation-duration: 0.2s;
+                animation-timing-function: linear;
+                animation-fill-mode: forwards;
+            }
+
+            @keyframes selected {
+                0% {
+                    border: 2px solid rgba(126, 126, 126, 0);
+                    opacity: 1;
+                }
+
+                50% {
+                    border: 2px solid rgba(126, 126, 126, 0.5);
+                    opacity: 0.65;
+                }
+
+                100% {
+                    border: 2px solid rgba(126, 126, 126, 1);
+                    opacity: 0.3;
+                }
             }
 
             /* Numbering Img */
             .number-overlay {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                height: 30px;
                 position: absolute;
-                color: white;
+                color: black;
                 font-size: 30px;
-                font-family: 'Noto Sans KR', sans-serif;
-                background-color: rgba(0, 0, 0, 1);
+                font-family: "Noto Sans KR", sans-serif;
+                background-color: rgba(255, 255, 255, 0);
+
                 padding: 30px;
                 border-radius: 100%;
                 pointer-events: none; /* 배치된 이미지 위에서 마우스 이벤트를 차단합니다. */
@@ -51,7 +82,7 @@
                 border-radius: 7px;
                 background-color: rgb(36, 36, 36);
                 border-color: rgb(102, 101, 101);
-                font-family: 'Noto Sans KR', sans-serif;
+                font-family: "Noto Sans KR", sans-serif;
                 position: fixed;
                 right: 5vw;
                 top: 90%;
@@ -63,22 +94,24 @@
             // Var Setting
             var selected_list = [];
             var num = 0;
-            
+
             // Img Select Function
             function select_img(imagenumber) {
-                var target = document.querySelector('img[alt="Image ' + imagenumber + '"]');
-                var target_checkbox = document.getElementById('checkbox' + imagenumber);
-                var data = document.getElementById('for_data_send');
-                
+                var target = document.querySelector(
+                    'img[alt="Image ' + imagenumber + '"]'
+                );
+                var target_checkbox = document.getElementById(
+                    "checkbox" + imagenumber
+                );
+                var data = document.getElementById("for_data_send");
+
                 if (target_checkbox.checked == false && num < 4) {
-                    target.classList.add('selected');
+                    target.classList.add("selected");
                     target_checkbox.checked = true;
                     num++;
                     selected_list.push(imagenumber);
-                }
-                
-                else if (target_checkbox.checked == true) {
-                    target.classList.remove('selected');
+                } else if (target_checkbox.checked == true) {
+                    target.classList.remove("selected");
                     target_checkbox.checked = false;
                     num--;
 
@@ -88,33 +121,29 @@
                             i--;
                         }
                     }
-                } 
-            
-                else if (num >= 4) 
-                {
+                } else if (num >= 4) {
                     // Need More Code If Num Is Bigger Than 4
                 }
 
-                var button = document.getElementById('custom-button');
+                var button = document.getElementById("custom-button");
 
-                if (selected_list.length ===4){
-                    button.removeAttribute('style')
-                }
-                
-                else{
-                    button.setAttribute('style', 'display: none;')
+                if (selected_list.length === 4) {
+                    button.removeAttribute("style");
+                } else {
+                    button.setAttribute("style", "display: none;");
                 }
 
                 update_number_overlay();
                 send_selected_list();
             }
-            
+
             // Update Numbering Function
             function update_number_overlay() {
                 // Var Setting
-                var imageGrid = document.querySelector('.image-grid');
-                var images = imageGrid.getElementsByTagName('img');
-                var numberOverlays = imageGrid.getElementsByClassName('number-overlay');
+                var imageGrid = document.querySelector(".image-grid");
+                var images = imageGrid.getElementsByTagName("img");
+                var numberOverlays =
+                    imageGrid.getElementsByClassName("number-overlay");
 
                 // Remoce All Old Numbering
                 while (numberOverlays.length > 0) {
@@ -126,14 +155,14 @@
                     var selectedNumber = selected_list[i];
                     var selectedImage = images[selectedNumber - 1];
 
-                    var numberOverlay = document.createElement('div');
-                    numberOverlay.className = 'number-overlay';
-                    numberOverlay.textContent = ' '+(i + 1)+'';
+                    var numberOverlay = document.createElement("div");
+                    numberOverlay.className = "number-overlay";
+                    numberOverlay.textContent = " " + (i + 1) + "";
 
                     // Setting Position
                     var imageRect = selectedImage.getBoundingClientRect();
-                    numberOverlay.style.top = imageRect.top + 'px';
-                    numberOverlay.style.left = imageRect.left + 'px';
+                    numberOverlay.style.top = imageRect.top + "px";
+                    numberOverlay.style.left = imageRect.left + "px";
 
                     selectedImage.parentNode.appendChild(numberOverlay);
                 }
@@ -143,38 +172,162 @@
             function send_selected_list() {
                 // Using AJAX, We Can Send List javascript -> python flask
                 $.ajax({
-                    url: '/selected',
-                    type: 'POST',
+                    url: "/selected",
+                    type: "POST",
                     data: JSON.stringify(selected_list),
-                    contentType: 'application/json',
+                    contentType: "application/json",
 
-                    success: function(response) {
+                    success: function (response) {
                         console.log(response);
-                    }
+                    },
                 });
             }
         </script>
     </head>
 
-    <body style="background-color: black;">
-        <div class="image-grid">
-            <input name="selected" value="1" type="checkbox" id="checkbox1" onclick="select_img(1)" style="display: none;">
-            <input name="selected" value="2" type="checkbox" id="checkbox2" onclick="select_img(2)" style="display: none;">
-            <input name="selected" value="3" type="checkbox" id="checkbox3" onclick="select_img(3)" style="display: none;">
-            <input name="selected" value="4" type="checkbox" id="checkbox4" onclick="select_img(4)" style="display: none;">
-            <input name="selected" value="5" type="checkbox" id="checkbox5" onclick="select_img(5)" style="display: none;">
-            <input name="selected" value="6" type="checkbox" id="checkbox6" onclick="select_img(6)" style="display: none;">
-            <input name="selected" value="7" type="checkbox" id="checkbox7" onclick="select_img(7)" style="display: none;">
-            <input name="selected" value="8" type="checkbox" id="checkbox8" onclick="select_img(8)" style="display: none;">
-            <img src="static/image/img_1.webp" alt="Image 1" onclick="select_img(1)">
-            <img src="static/image/img_2.webp" alt="Image 2" onclick="select_img(2)">
-            <img src="static/image/img_3.webp" alt="Image 3" onclick="select_img(3)">
-            <img src="static/image/img_4.webp" alt="Image 4" onclick="select_img(4)">
-            <img src="static/image/img_5.webp" alt="Image 5" onclick="select_img(5)">
-            <img src="static/image/img_6.webp" alt="Image 6" onclick="select_img(6)">
-            <img src="static/image/img_7.webp" alt="Image 7" onclick="select_img(7)">
-            <img src="static/image/img_8.webp" alt="Image 8" onclick="select_img(8)">
-            <button class="custom-button" onclick="location.href='makepic'" id = "custom-button" style="display: none;">Next</button>
+    <body style="background-color: #d2dae9">
+        <div class="container" style="text-align: center; margin: 30px">
+            <div class="head">
+                <div
+                    class="headline"
+                    style="width: 40vw; margin-top: 60px; text-align: left"
+                >
+                    <label
+                        style="
+                            font-size: 4em;
+                            font-family: Noto Sans KR;
+                            color: black;
+                            font-family: 'Noto Sans KR', sans-serif;
+                        "
+                        >사진을 선택하세요</label
+                    >
+                </div>
+            </div>
+            <div
+                class="line"
+                style="
+                    width: 100%;
+                    height: 1px;
+                    background-color: gray;
+                    margin-bottom: 10px;
+                "
+            ></div>
+            <div class="body">
+                <div class="image-grid">
+                    <input
+                        name="selected"
+                        value="1"
+                        type="checkbox"
+                        id="checkbox1"
+                        onclick="select_img(1)"
+                        style="display: none"
+                    />
+                    <input
+                        name="selected"
+                        value="2"
+                        type="checkbox"
+                        id="checkbox2"
+                        onclick="select_img(2)"
+                        style="display: none"
+                    />
+                    <input
+                        name="selected"
+                        value="3"
+                        type="checkbox"
+                        id="checkbox3"
+                        onclick="select_img(3)"
+                        style="display: none"
+                    />
+                    <input
+                        name="selected"
+                        value="4"
+                        type="checkbox"
+                        id="checkbox4"
+                        onclick="select_img(4)"
+                        style="display: none"
+                    />
+                    <input
+                        name="selected"
+                        value="5"
+                        type="checkbox"
+                        id="checkbox5"
+                        onclick="select_img(5)"
+                        style="display: none"
+                    />
+                    <input
+                        name="selected"
+                        value="6"
+                        type="checkbox"
+                        id="checkbox6"
+                        onclick="select_img(6)"
+                        style="display: none"
+                    />
+                    <input
+                        name="selected"
+                        value="7"
+                        type="checkbox"
+                        id="checkbox7"
+                        onclick="select_img(7)"
+                        style="display: none"
+                    />
+                    <input
+                        name="selected"
+                        value="8"
+                        type="checkbox"
+                        id="checkbox8"
+                        onclick="select_img(8)"
+                        style="display: none"
+                    />
+                    <img
+                        src="static/image/img_1.webp"
+                        alt="Image 1"
+                        onclick="select_img(1)"
+                    />
+                    <img
+                        src="static/image/img_2.webp"
+                        alt="Image 2"
+                        onclick="select_img(2)"
+                    />
+                    <img
+                        src="static/image/img_3.webp"
+                        alt="Image 3"
+                        onclick="select_img(3)"
+                    />
+                    <img
+                        src="static/image/img_4.webp"
+                        alt="Image 4"
+                        onclick="select_img(4)"
+                    />
+                    <img
+                        src="static/image/img_5.webp"
+                        alt="Image 5"
+                        onclick="select_img(5)"
+                    />
+                    <img
+                        src="static/image/img_6.webp"
+                        alt="Image 6"
+                        onclick="select_img(6)"
+                    />
+                    <img
+                        src="static/image/img_7.webp"
+                        alt="Image 7"
+                        onclick="select_img(7)"
+                    />
+                    <img
+                        src="static/image/img_8.webp"
+                        alt="Image 8"
+                        onclick="select_img(8)"
+                    />
+                    <button
+                        class="custom-button"
+                        onclick="location.href='makepic'"
+                        id="custom-button"
+                        style="display: none"
+                    >
+                        Next
+                    </button>
+                </div>
+            </div>
         </div>
     </body>
 </html>
