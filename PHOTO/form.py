@@ -82,15 +82,18 @@ def paste(p1, p2, p3, p4, f_t, q):
 
 def get_path():
     global PATH_P
-    t = PATH_P
+    path_ori = PATH_P
     
     global PATH_F
-    t1 = PATH_F
+    parh_pri = PATH_F
     
     global quantity
-    t2 = quantity
-    
-    print(t2)
-    
-    printer.printing(t1, t2)
-    return t
+    qu = quantity
+    if type(qu) == 'NoneType':
+        print('N')
+    else:
+        # print('qu', qu, type(qu))
+        qu = int(qu)
+        # print('t2i', t2, type(t2))
+        printer.printing(parh_pri, qu)
+    return path_ori
