@@ -11,6 +11,11 @@ import cv2
 import numpy as np
 from datetime import datetime
 import qr
+import printer
+
+PATH_P = None
+PATH_F = None
+quantity = None
 
 # Img Resize Function
 def resize_image_keep_aspect_ratio(image, new_width, new_height):
@@ -63,7 +68,29 @@ def paste(p1, p2, p3, p4, f_t, q):
     file_path_ori = "PHOTO/static/image/result_ori"+str(datetime.today())+".png"
     file_path_print = "PHOTO/static/image/result_print"+str(datetime.today())+".png"
 
+    # Save Path
+    global PATH_P
+    PATH_P = file_path_ori
+    global PATH_F
+    PATH_F = file_path_print
+    global quantity
+    quantity = q
     cv2.imwrite(file_path_print, new_image)
     cv2.imwrite(file_path_ori, output)
 
     qr.file_set(file_path_ori)
+
+def get_path():
+    global PATH_P
+    t = PATH_P
+    
+    global PATH_F
+    t1 = PATH_F
+    
+    global quantity
+    t2 = quantity
+    
+    print(t2)
+    
+    printer.printing(t1, t2)
+    return t
