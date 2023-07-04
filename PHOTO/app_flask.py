@@ -36,13 +36,13 @@ app = Flask(__name__, static_folder='./static/', static_url_path='/static')
 @app.route('/')
 def start():
     # Delete Old Picture
-    # try:
-    #     for i in range(8):
-    #         os.remove('PHOTO/static/image/img_'+str(i+1)+'.webp')
+    try:
+        for i in range(8):
+            os.remove('PHOTO/static/image/img_'+str(i+1)+'.webp')
             
-    # except:
-    #     # print("no more pic")
-    #     pass        
+    except:
+        # print("no more pic")
+        pass        
     
     return render_template('start.html')
 
@@ -58,7 +58,7 @@ def save():
     global quantity # Quantity To Print Picture
     quantity = request.form.get('quantity')
     
-    # print(quantity) # Debugging
+    print('q', quantity) # Debugging
     
     global style # Frame Style
     style = request.form.get('f_color')
@@ -71,7 +71,7 @@ def save():
 def pay():
     global quantity
     price = int(quantity)*3000
-    print(price)
+    # print(price)
     #Code#
     # Not Developed, After Arduino Job Is Done
     # return render_template('payment.html') # Release Ver.
@@ -104,6 +104,7 @@ def selected():
 # Pic make_pic Page
 @app.route('/makepic')
 def makepic():
+    global quantity
     form.paste(s_l[0],s_l[1],s_l[2],s_l[3], style, quantity)
     #s_l[0] => first Pic Num, .... , style => Frame Style, quantity => Quantity To Print Picture
     
